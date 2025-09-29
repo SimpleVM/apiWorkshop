@@ -54,14 +54,20 @@ Select an image that contains in the tags attribute either `theiaide`, `vscode` 
 Again, please store the name of the image somewhere temporarily on your laptop.
 In the subsequent commands the id will be references as **image_name** 
 
+### Download the script
+
+The following script will be used to download a file from object storage to your VM:
+```
+wget https://raw.githubusercontent.com/SimpleVM/apiWorkshop/refs/heads/main/data.sh
+```
+
 ### Run the command 
 
 Now that we have the API key, image, flavor in order to start a virtual machine, we 
 tell the SimpleVM API to start the VM and execute a script on start.
 The script will download Metagenomics data from S3 once the VM is started. 
 
-Run the actual command:
-where the following parameters must be updated according to your previous API calls:
+Run the actual command where the following parameters must be updated according to your previous API calls:
 
 * API_KEY
 * project_id 
@@ -97,17 +103,21 @@ curl -v -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -H "X-API-KEY: YOUR_API_KEY"
 ```
 
-### Verfy the correct provioning
+### Verify the correct provisioning
 
 Once you have executed the last API call you can go to the `Instances` page on the SimpleVM website and check whether
 SimpleVM has correctly provisioned your VM.
 
 ![](./figures/list_vm.png)
 
-### Verfiy that your script was executed
+### Verify that your script was executed
 
 Since we have executed a script on the VM, you can open the research environment in your browser (e.g. vscode, guacamole or theiaide).
 And verfiy that the data is at your home directory.
 
 For example, in Guacamole, you can open a terminal and run the following command to check whether the expected files are present:
 
+```
+ls ~/
+```
+The command above should list a file names `DRR127583_1.fastq.gz`.
