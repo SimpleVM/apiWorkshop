@@ -19,6 +19,11 @@ You can generate your API via the SimpleVM website
 
 ![](./figures/generate_api_key.png)
 
+For this tutorial, you will need all the scopes except the 'snapshot:create' scope.
+
+![](./figures/key_scopes.png)
+
+
 You have to store the key somewhere temporarily on your laptop. You will need it for all subsequent commands.
 where it will be referenced as `YOUR_API_KEY`.
 
