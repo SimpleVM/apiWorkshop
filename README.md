@@ -125,8 +125,20 @@ The VM is ready when the `vm_state` is `active` and the `task_state` is empty.
 
 ### Verify that your script was executed
 
-Since we have executed a script on the VM, you can open the research environment in your browser (e.g. vscode, guacamole or theiaide).
-And verfiy that the data is at your home directory.
+> ⚠️ **Important:** Your **VM must be active** to perform the following steps.
+
+Since we have executed a script on the VM, you can now open the research environment in your browser (e.g. vscode, guacamole or theiaide).
+Verify that the data is in your home directory.
+
+You can find the link to your research environment in the 'How to Connect' section of your VM in the instances overview.
+
+![](./figures/how_to_connect.png)
+
+If you check the status of your VM via an API call, look for the `modes` dictionary. 
+Find the entry where the `name` attribute matches your chosen `RESENV`. 
+The `copy_field` in that entry contains the link to your research environment.
+
+
 
 For example, in Guacamole, you can open a terminal and run the following command to check whether the expected files are present:
 
