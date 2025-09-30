@@ -77,12 +77,13 @@ Run the actual command where the following parameters must be updated according 
 * API_KEY
 * PROJECT_ID 
 * IMAGE_NAME
-* FLAVOR_NAME 
+* FLAVOR_NAME
+  
 
 In addition the **RESENV** variable should be replaced by the corresponding image you had chosen (e.g. vscode, guacamole or theiaide).
 Optionally, you can use different name for the VM then `script-vmfile`
 ```
-curl -v -X POST https://simplevm.denbi.de/portal/api/vms/ \
+curl  -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -d 'project_id=PROJECT_ID' \
   -d 'image_name=IMAGE_NAME' \
   -d 'flavor_name=FLAVOR_NAME' \
@@ -91,12 +92,12 @@ curl -v -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -d 'research_environment_backend.template=RESENV' \
   -d 'research_environment_backend.user_path=mypath' \
   --data-urlencode "additional_script@data.sh" \
-  -H "X-API-KEY: YOUR_API_KEY"
+  -H "X-API-KEY: YOUR_API_KEY" | jq
 ```
 
 Example Call:
 ```
-curl -v -X POST https://simplevm.denbi.de/portal/api/vms/ \
+curl  -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -d 'project_id=718' \
   -d 'image_nmae=VSCode-ubuntu24.04 de.NBI (2025-08-19)' \
   -d 'flavor_name=de.NBI tiny' \
@@ -105,8 +106,12 @@ curl -v -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -d 'research_environment_backend.template=vscode' \
   -d 'research_environment_backend.user_path=mypath' \
   --data-urlencode "additional_script@data.sh" \
-  -H "X-API-KEY: YOUR_API_KEY"
+  -H "X-API-KEY: YOUR_API_KEY" | jq
 ```
+
+Please save the `uuid` fromt the response.
+In the subsequent commands the id will be references as **UUID** 
+
 
 ### Verify the correct provisioning
 
@@ -115,10 +120,10 @@ SimpleVM has correctly provisioned your VM.
 
 ![](./figures/list_vm.png)
 
-Alternatively, you can check the status of the VM directly via the API. Replace 'YOUR_VM_NAME' with the VM name that you provided at startup.
+Alternatively, you can check the status of the VM directly via the API. 
 
 ```
-curl -X GET "https://simplevm.denbi.de/portal/api/vms/?text=YOUR_VM_NAME" -H "X-API-KEY: VoHFi7rm.NsoVka9sZsfpxDzvvQIRfsQk7fJhmHXF" | jq | less
+curl -X GET "https://simplevm.denbi.de/portal/api/vms/UUID/" -H "X-API-KEY: VoHFi7rm.NsoVka9sZsfpxDzvvQIRfsQk7fJhmHXF" | jq | less
 
 ```
 The VM is ready when the `vm_state` is `active` and the `task_state` is empty.
@@ -138,7 +143,12 @@ If you check the status of your VM via an API call, look for the `modes` diction
 Find the entry where the `name` attribute matches your chosen `RESENV`. 
 The `copy_field` in that entry contains the link to your research environment.
 
+You can direclty filter the output with jq via:
 
+```
+curl -X GET "https://simplevm.denbi.de/portal/api/vms/UUID" -H "X-API-KEY: YOUR_API_KEY" |  jq '.modes[] | select(.name == "RESENV") | .copy_field' 
+
+```
 
 For example, in Guacamole, you can open a terminal and run the following command to check whether the expected files are present:
 
