@@ -109,8 +109,8 @@ curl  -X POST https://simplevm.denbi.de/portal/api/vms/ \
   -H "X-API-KEY: YOUR_API_KEY" | jq
 ```
 
-Please save the `uuid` fromt the response.
-In the subsequent commands the id will be references as **UUID** 
+Please save the `uuid` from the response.
+In the subsequent commands the uuid will be references as **UUID** 
 
 
 ### Verify the correct provisioning
