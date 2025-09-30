@@ -42,7 +42,7 @@ In the subsequent commands the id will be references as **project_id**
 
 You can list existing flavors with the following command:
 ```
-curl -X GET https://simplevm.denbi.de/portal/api/projects/project_id/images/ -H "X-API-KEY: YOUR_API_KEY" | jq | less
+curl -X GET https://simplevm.denbi.de/portal/api/projects/project_id/flavors/ -H "X-API-KEY: YOUR_API_KEY" | jq | less
 ```
 
 Select a flavor of your choice, and save the name of it. Example: `de.NBI small`
