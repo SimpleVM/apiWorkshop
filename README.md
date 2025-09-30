@@ -19,6 +19,11 @@ You can generate your API via the SimpleVM website
 
 ![](./figures/generate_api_key.png)
 
+For this tutorial, you will need all the scopes except the 'snapshot:create' scope.
+
+![](./figures/key_scopes.png)
+
+
 You have to store the key somewhere temporarily on your laptop. You will need it for all subsequent commands.
 where it will be referenced as `YOUR_API_KEY`.
 
@@ -37,7 +42,7 @@ In the subsequent commands the id will be references as **project_id**
 
 You can list existing flavors with the following command:
 ```
-curl -X GET https://simplevm.denbi.de/portal/api/projects/project_id/images/ -H "X-API-KEY: YOUR_API_KEY" | jq | less
+curl -X GET https://simplevm.denbi.de/portal/api/projects/project_id/flavors/ -H "X-API-KEY: YOUR_API_KEY" | jq | less
 ```
 
 Select a flavor of your choice, and save the name of it. Example: `de.NBI small`
