@@ -146,7 +146,7 @@ The `copy_field` in that entry contains the link to your research environment.
 You can direclty filter the output with jq via:
 
 ```
-curl -X GET "https://simplevm.denbi.de/portal/api/vms/UUID" -H "X-API-KEY: YOUR_API_KEY" |  jq '.modes[] | select(.name == "RESENV") | .copy_field' 
+curl -X GET "https://simplevm.denbi.de/portal/api/vms/UUID/" -H "X-API-KEY: YOUR_API_KEY" |  jq '.modes[] | select(.name == "RESENV") | .copy_field' 
 
 ```
 
